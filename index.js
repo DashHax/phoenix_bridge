@@ -39,6 +39,7 @@ serial.on("data", (data) => {
         } else {
             let arr = tryJSON(arrBuff);
             readingBuffers.push(arr);
+            console.log("> " + arrBuff);
             arrBuff = "";
         }
     }
@@ -46,17 +47,21 @@ serial.on("data", (data) => {
 
 app.post("/temp", (req, res) => {
     serial.write("021", (err, _) => {
-        if (err)
+        if (err) {
             res.json({status: "error", error: err.message});
-        else {
+            console.log("Error level 1:", err);
+        } else {
             setTimeout(() => {
                 serial.write("000", (err2, _) => {
 
-                    if (err2)
+                    if (err2) {
                         res.json({status: "error", error: err2.message });
-                    else {
+                        console.log("Error level 2:", err2);
+                    } else {
                         let avg = new Array(64).fill(0);
                         let totalRow = 0;
+
+                        console.log("Sending reading...");
 
                         for (let row = 0; row < avg.length; row++) {
                             totalRow = readingBuffers.length;
