@@ -15,7 +15,7 @@ const serial = new SerialPort("COM5", { baudRate: 115200 });
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: [/localhost/]
+    origin: [/localhost/, /odellobrien\.com$/]
 }));
 
 app.get("/", (req, res) => {
