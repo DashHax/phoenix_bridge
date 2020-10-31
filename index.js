@@ -11,7 +11,7 @@ const { tryJSON } = require("./helper");
 
 const app = express();
 const port = 52073;
-const serial = new SerialPort("COM5", { baudRate: 115200 });
+const serial = new SerialPort(process.argv.length > 2 ? (process.argv[2] || "COM5") : "COM5", { baudRate: 115200 });
 
 app.use(bodyParser.json());
 app.use(cors({
