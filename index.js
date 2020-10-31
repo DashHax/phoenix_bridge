@@ -84,7 +84,7 @@ app.post("/temp", (req, res) => {
 })
 
 serial.on("open", () => {
-    console.log("IVIS Client is ready for IVIS Thermo!");
+    console.log("IVIS Client is ready for IVIS Thermo on port " + comPort + "!");
 })
 
 app.listen(port, () => {
